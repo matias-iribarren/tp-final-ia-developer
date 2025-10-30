@@ -61,7 +61,8 @@ export function ManualEntryDialog({ workspaceId, projects, tasksByProject }: Man
       <DialogTrigger asChild>
         <Button>
           <Plus className="h-4 w-4 mr-2" />
-          Add Time Entry
+          <span className="hidden sm:inline">Add Time Entry</span>
+          <span className="sm:hidden">Add</span>
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[500px]">
@@ -98,11 +99,7 @@ export function ManualEntryDialog({ workspaceId, projects, tasksByProject }: Man
 
             <div className="space-y-2">
               <Label htmlFor="taskId">Task</Label>
-              <Select
-                value={taskId}
-                onValueChange={setTaskId}
-                disabled={isLoading || projectId === "none"}
-              >
+              <Select value={taskId} onValueChange={setTaskId} disabled={isLoading || projectId === "none"}>
                 <SelectTrigger>
                   <SelectValue placeholder="Select task" />
                 </SelectTrigger>
@@ -116,7 +113,7 @@ export function ManualEntryDialog({ workspaceId, projects, tasksByProject }: Man
               </Select>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div className="space-y-2">
                 <Label htmlFor="startTime">Start Time</Label>
                 <Input id="startTime" name="startTime" type="datetime-local" required disabled={isLoading} />
@@ -134,11 +131,11 @@ export function ManualEntryDialog({ workspaceId, projects, tasksByProject }: Man
               </Label>
             </div>
           </div>
-          <DialogFooter>
-            <Button type="button" variant="outline" onClick={() => setOpen(false)}>
+          <DialogFooter className="flex-col gap-2 sm:flex-row">
+            <Button type="button" variant="outline" onClick={() => setOpen(false)} className="w-full sm:w-auto">
               Cancel
             </Button>
-            <Button type="submit" disabled={isLoading}>
+            <Button type="submit" disabled={isLoading} className="w-full sm:w-auto">
               {isLoading ? "Creating..." : "Create Entry"}
             </Button>
           </DialogFooter>

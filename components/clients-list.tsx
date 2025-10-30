@@ -48,20 +48,20 @@ export function ClientsList({ clients }: ClientsListProps) {
       {clients.map((client) => (
         <Card key={client.id}>
           <CardContent className="p-6">
-            <div className="flex items-start justify-between">
-              <div className="flex-1">
-                <h3 className="font-semibold">{client.name}</h3>
+            <div className="flex items-start justify-between gap-2">
+              <div className="flex-1 min-w-0">
+                <h3 className="font-semibold truncate">{client.name}</h3>
                 <div className="mt-2 space-y-1">
                   {client.email && (
                     <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <Mail className="h-3 w-3" />
-                      {client.email}
+                      <Mail className="h-3 w-3 flex-shrink-0" />
+                      <span className="truncate">{client.email}</span>
                     </div>
                   )}
                   {client.address && (
                     <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <MapPin className="h-3 w-3" />
-                      {client.address}
+                      <MapPin className="h-3 w-3 flex-shrink-0" />
+                      <span className="truncate">{client.address}</span>
                     </div>
                   )}
                 </div>
@@ -69,6 +69,7 @@ export function ClientsList({ clients }: ClientsListProps) {
               <Button
                 variant="ghost"
                 size="icon"
+                className="flex-shrink-0"
                 onClick={() => handleDelete(client.id)}
                 disabled={deletingId === client.id}
               >

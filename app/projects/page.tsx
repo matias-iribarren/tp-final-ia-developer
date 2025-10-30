@@ -20,8 +20,8 @@ export default async function ProjectsPage() {
   return (
     <DashboardLayout session={session} workspace={currentWorkspace}>
       <div className="space-y-6">
-        <div className="flex items-center justify-between">
-          <h1 className="text-3xl font-bold">Projects</h1>
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <h1 className="text-2xl font-bold md:text-3xl">Projects</h1>
           <CreateProjectDialog workspaceId={currentWorkspace.id} clients={clients} />
         </div>
 

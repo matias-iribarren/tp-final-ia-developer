@@ -104,30 +104,33 @@ export function TimeEntriesList({ entries }: TimeEntriesListProps) {
           </CardHeader>
           <CardContent className="space-y-2">
             {dateEntries.map((entry) => (
-              <div key={entry.id} className="flex items-center justify-between rounded-lg border p-3 hover:bg-muted/50">
-                <div className="flex flex-1 items-center gap-4">
+              <div
+                key={entry.id}
+                className="flex flex-col gap-3 rounded-lg border p-3 hover:bg-muted/50 md:flex-row md:items-center md:justify-between"
+              >
+                <div className="flex flex-1 items-start gap-3 md:items-center md:gap-4">
                   {entry.project_id && (
                     <div
-                      className="h-4 w-1 rounded-full"
+                      className="mt-1 h-4 w-1 flex-shrink-0 rounded-full md:mt-0"
                       style={{ backgroundColor: entry.project_color || "#4CAF50" }}
                     />
                   )}
-                  <div className="flex-1">
-                    <p className="font-medium">{entry.description || "No description"}</p>
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <div className="flex-1 min-w-0">
+                    <p className="font-medium truncate">{entry.description || "No description"}</p>
+                    <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
                       {entry.project_name && (
                         <>
-                          <span>{entry.project_name}</span>
+                          <span className="truncate">{entry.project_name}</span>
                           {entry.task_name && <span>•</span>}
                         </>
                       )}
-                      {entry.task_name && <span>{entry.task_name}</span>}
+                      {entry.task_name && <span className="truncate">{entry.task_name}</span>}
                     </div>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-4">
-                  <div className="text-right">
+                <div className="flex items-center justify-between gap-4 md:justify-end">
+                  <div className="text-left md:text-right">
                     <p className="font-mono font-semibold">{formatDuration(entry.start_time, entry.end_time)}</p>
                     <p className="text-sm text-muted-foreground">
                       {formatTime(entry.start_time)} - {entry.end_time ? formatTime(entry.end_time) : "Running"}

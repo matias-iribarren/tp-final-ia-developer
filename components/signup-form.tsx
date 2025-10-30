@@ -26,7 +26,7 @@ export function SignUpForm() {
   }
 
   return (
-    <Card className="w-full max-w-md">
+    <Card className="w-full max-w-md mx-4">
       <CardHeader>
         <CardTitle className="text-2xl">Create an account</CardTitle>
         <CardDescription>Get started with Clockify</CardDescription>

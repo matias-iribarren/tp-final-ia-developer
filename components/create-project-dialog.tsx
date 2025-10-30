@@ -54,7 +54,8 @@ export function CreateProjectDialog({ workspaceId, clients }: CreateProjectDialo
       <DialogTrigger asChild>
         <Button>
           <Plus className="mr-2 h-4 w-4" />
-          New Project
+          <span className="hidden sm:inline">New Project</span>
+          <span className="sm:hidden">New</span>
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[500px]">
@@ -88,7 +89,7 @@ export function CreateProjectDialog({ workspaceId, clients }: CreateProjectDialo
 
             <div className="space-y-2">
               <Label>Color</Label>
-              <div className="flex gap-2">
+              <div className="flex flex-wrap gap-2">
                 {PROJECT_COLORS.map((color) => (
                   <button
                     key={color}
@@ -112,11 +113,11 @@ export function CreateProjectDialog({ workspaceId, clients }: CreateProjectDialo
               </Label>
             </div>
           </div>
-          <DialogFooter>
-            <Button type="button" variant="outline" onClick={() => setOpen(false)}>
+          <DialogFooter className="flex-col gap-2 sm:flex-row">
+            <Button type="button" variant="outline" onClick={() => setOpen(false)} className="w-full sm:w-auto">
               Cancel
             </Button>
-            <Button type="submit" disabled={isLoading}>
+            <Button type="submit" disabled={isLoading} className="w-full sm:w-auto">
               {isLoading ? "Creating..." : "Create Project"}
             </Button>
           </DialogFooter>

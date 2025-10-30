@@ -64,14 +64,14 @@ npm install
 3. Set up your environment variables:
    - Create a `.env.local` file in the root directory
    - Add your Neon connection string:
-     ```
+     \`\`\`
      NEON_POSTGRES_URL="your_neon_connection_string_here"
-     ```
+     \`\`\`
 
 4. Run the database migrations:
-   ```bash
+   \`\`\`bash
    npm run create-schema
-   ```
+   \`\`\`
    This will create all necessary tables and structures in your database.
 
 5. Start the development server:

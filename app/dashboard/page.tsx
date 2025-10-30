@@ -31,7 +31,7 @@ export default async function DashboardPage() {
 
   return (
     <DashboardLayout session={session} workspace={currentWorkspace}>
-      <div className="space-y-8">
+      <div className="space-y-6 md:space-y-8">
         <div>
           <TimerWidget
             workspaceId={currentWorkspace.id}
@@ -41,13 +41,9 @@ export default async function DashboardPage() {
           />
         </div>
 
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <h2 className="text-2xl font-bold">Time Entries</h2>
-          <ManualEntryDialog
-            workspaceId={currentWorkspace.id}
-            projects={projects}
-            tasksByProject={tasksByProject}
-          />
+          <ManualEntryDialog workspaceId={currentWorkspace.id} projects={projects} tasksByProject={tasksByProject} />
         </div>
 
         <TimeEntriesList entries={timeEntries} />

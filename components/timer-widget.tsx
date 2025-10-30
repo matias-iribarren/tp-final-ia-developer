@@ -90,8 +90,8 @@ export function TimerWidget({ workspaceId, activeEntry, projects, tasksByProject
   }
 
   return (
-    <div className="flex items-center gap-4 rounded-lg border bg-card p-4">
-      <div className="flex flex-1 items-center gap-3">
+    <div className="flex flex-col gap-4 rounded-lg border bg-card p-4 lg:flex-row lg:items-center">
+      <div className="flex flex-1 flex-col gap-3 md:flex-row md:items-center">
         <Input
           placeholder="What are you working on?"
           value={activeEntry ? activeEntry.description || "" : description}
@@ -104,7 +104,7 @@ export function TimerWidget({ workspaceId, activeEntry, projects, tasksByProject
           onValueChange={setProjectId}
           disabled={!!activeEntry || isLoading}
         >
-          <SelectTrigger className="w-[200px]">
+          <SelectTrigger className="w-full md:w-[200px]">
             <SelectValue placeholder="Select project" />
           </SelectTrigger>
           <SelectContent>
@@ -120,12 +120,8 @@ export function TimerWidget({ workspaceId, activeEntry, projects, tasksByProject
           </SelectContent>
         </Select>
 
-        <Select
-          value={taskId}
-          onValueChange={setTaskId}
-          disabled={!!activeEntry || isLoading || projectId === "none"}
-        >
-          <SelectTrigger className="w-[200px]">
+        <Select value={taskId} onValueChange={setTaskId} disabled={!!activeEntry || isLoading || projectId === "none"}>
+          <SelectTrigger className="w-full md:w-[200px]">
             <SelectValue placeholder="Select task" />
           </SelectTrigger>
           <SelectContent>
@@ -138,7 +134,7 @@ export function TimerWidget({ workspaceId, activeEntry, projects, tasksByProject
         </Select>
       </div>
 
-      <div className="flex items-center gap-3">
+      <div className="flex items-center justify-between gap-3 lg:justify-end">
         <div className="min-w-[100px] text-center font-mono text-2xl font-semibold">{formatTime(elapsedTime)}</div>
         {activeEntry ? (
           <Button onClick={handleStop} disabled={isLoading} size="lg" variant="destructive">

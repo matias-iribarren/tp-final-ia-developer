@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { Calendar, Download, Loader2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -22,22 +22,8 @@ export function ReportsView({ workspaceId }: ReportsViewProps) {
   const [summary, setSummary] = useState<ReportSummary | null>(null)
   const [entries, setEntries] = useState<TimeEntry[]>([])
 
-  // Set default dates (current week)
-  useEffect(() => {
-    const today = new Date()
-    const monday = new Date(today)
-    monday.setDate(today.getDate() - today.getDay() + 1)
-
-    const sunday = new Date(monday)
-    sunday.setDate(monday.getDate() + 6)
-
-    setStartDate(monday.toISOString().split("T")[0])
-    setEndDate(sunday.toISOString().split("T")[0])
-  }, [])
-
-  async function handleGenerateReport() {
+  const handleGenerateReport = useCallback(async () => {
     if (!startDate || !endDate) {
-      alert("Please select both start and end dates")
       return
     }
 
@@ -53,7 +39,20 @@ export function ReportsView({ workspaceId }: ReportsViewProps) {
     }
 
     setIsLoading(false)
-  }
+  }, [workspaceId, startDate, endDate])
+
+  // Set default dates (current week)
+  useEffect(() => {
+    const today = new Date()
+    const monday = new Date(today)
+    monday.setDate(today.getDate() - today.getDay() + 1)
+
+    const sunday = new Date(monday)
+    sunday.setDate(monday.getDate() + 6)
+
+    setStartDate(monday.toISOString().split("T")[0])
+    setEndDate(sunday.toISOString().split("T")[0])
+  }, [])
 
   async function handleExportCSV() {
     if (!startDate || !endDate) {
@@ -83,12 +82,11 @@ export function ReportsView({ workspaceId }: ReportsViewProps) {
     setIsExporting(false)
   }
 
-  // Auto-generate report when dates change
   useEffect(() => {
     if (startDate && endDate) {
       handleGenerateReport()
     }
-  }, [startDate, endDate])
+  }, [startDate, endDate, handleGenerateReport])
 
   return (
     <div className="space-y-6">
@@ -97,7 +95,7 @@ export function ReportsView({ workspaceId }: ReportsViewProps) {
           <CardTitle>Date Range</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="flex items-end gap-4">
+          <div className="flex flex-col gap-4 md:flex-row md:items-end">
             <div className="flex-1 space-y-2">
               <Label htmlFor="startDate">Start Date</Label>
               <Input
@@ -118,7 +116,7 @@ export function ReportsView({ workspaceId }: ReportsViewProps) {
                 disabled={isLoading}
               />
             </div>
-            <Button onClick={handleExportCSV} disabled={isExporting || !summary}>
+            <Button onClick={handleExportCSV} disabled={isExporting || !summary} className="w-full md:w-auto">
               {isExporting ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -143,7 +141,7 @@ export function ReportsView({ workspaceId }: ReportsViewProps) {
 
       {!isLoading && summary && (
         <>
-          <div className="grid gap-4 md:grid-cols-4">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             <Card>
               <CardHeader className="pb-3">
                 <CardTitle className="text-sm font-medium text-muted-foreground">Total Time</CardTitle>
@@ -233,17 +231,20 @@ export function ReportsView({ workspaceId }: ReportsViewProps) {
                       Math.floor((new Date(entry.end_time).getTime() - new Date(entry.start_time).getTime()) / 1000)
 
                     return (
-                      <div key={entry.id} className="flex items-center justify-between rounded-lg border p-3">
-                        <div className="flex items-center gap-3">
+                      <div
+                        key={entry.id}
+                        className="flex flex-col gap-3 rounded-lg border p-3 md:flex-row md:items-center md:justify-between"
+                      >
+                        <div className="flex items-start gap-3 md:items-center">
                           {entry.project_id && (
                             <div
-                              className="h-4 w-1 rounded-full"
+                              className="mt-1 h-4 w-1 flex-shrink-0 rounded-full md:mt-0"
                               style={{ backgroundColor: entry.project_color || "#4CAF50" }}
                             />
                           )}
-                          <div>
-                            <p className="font-medium">{entry.description || "No description"}</p>
-                            <p className="text-sm text-muted-foreground">
+                          <div className="min-w-0">
+                            <p className="font-medium truncate">{entry.description || "No description"}</p>
+                            <p className="text-sm text-muted-foreground truncate">
                               {entry.project_name && <span>{entry.project_name}</span>}
                               {entry.task_name && (
                                 <>
@@ -254,7 +255,7 @@ export function ReportsView({ workspaceId }: ReportsViewProps) {
                             </p>
                           </div>
                         </div>
-                        <div className="text-right">
+                        <div className="text-left md:text-right">
                           <p className="font-mono font-semibold">{duration ? formatDuration(duration) : "0m"}</p>
                           <p className="text-sm text-muted-foreground">
                             {new Date(entry.start_time).toLocaleDateString()}
