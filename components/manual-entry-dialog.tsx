@@ -17,21 +17,31 @@ import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Checkbox } from "@/components/ui/checkbox"
 import { createManualEntry } from "@/app/actions/time-entries"
-import type { Project } from "@/lib/types"
+import type { Project, Task } from "@/lib/types"
 
 interface ManualEntryDialogProps {
   workspaceId: string
   projects: Project[]
+  tasksByProject: Record<string, Task[]>
 }
 
-export function ManualEntryDialog({ workspaceId, projects }: ManualEntryDialogProps) {
+export function ManualEntryDialog({ workspaceId, projects, tasksByProject }: ManualEntryDialogProps) {
   const [open, setOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
+  const [projectId, setProjectId] = useState<string>("none")
+  const [taskId, setTaskId] = useState<string>("")
 
   async function handleSubmit(formData: FormData) {
     setIsLoading(true)
 
     formData.append("workspaceId", workspaceId)
+    if (projectId === "none" || !taskId) {
+      alert("Seleccioná un proyecto y una tarea")
+      setIsLoading(false)
+      return
+    }
+    formData.append("projectId", projectId)
+    formData.append("taskId", taskId)
 
     const result = await createManualEntry(formData)
 
@@ -40,6 +50,8 @@ export function ManualEntryDialog({ workspaceId, projects }: ManualEntryDialogPr
       setIsLoading(false)
     } else {
       setOpen(false)
+      setProjectId("none")
+      setTaskId("")
       setIsLoading(false)
     }
   }
@@ -66,18 +78,38 @@ export function ManualEntryDialog({ workspaceId, projects }: ManualEntryDialogPr
 
             <div className="space-y-2">
               <Label htmlFor="projectId">Project</Label>
-              <Select name="projectId" disabled={isLoading}>
+              <Select value={projectId} onValueChange={setProjectId} disabled={isLoading}>
                 <SelectTrigger>
-                  <SelectValue placeholder="Select project (optional)" />
+                  <SelectValue placeholder="Select project" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="none">No project</SelectItem>
+                  <SelectItem value="none">Select a project</SelectItem>
                   {projects.map((project) => (
                     <SelectItem key={project.id} value={project.id}>
                       <div className="flex items-center gap-2">
                         <div className="h-3 w-3 rounded-full" style={{ backgroundColor: project.color }} />
                         {project.name}
                       </div>
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="taskId">Task</Label>
+              <Select
+                value={taskId}
+                onValueChange={setTaskId}
+                disabled={isLoading || projectId === "none"}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select task" />
+                </SelectTrigger>
+                <SelectContent>
+                  {(projectId !== "none" ? tasksByProject[projectId] || [] : []).map((task) => (
+                    <SelectItem key={task.id} value={task.id}>
+                      {task.name}
                     </SelectItem>
                   ))}
                 </SelectContent>

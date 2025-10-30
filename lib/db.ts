@@ -1,70 +1,13 @@
-// Custom Neon SQL client using HTTP API
+// Using Neon serverless driver
+import { neon } from "@neondatabase/serverless"
 
-interface QueryResult {
-  rows: any[]
-  fields: any[]
-  rowCount: number
+const connectionString = process.env.NEON_POSTGRES_URL
+
+if (!connectionString) {
+  throw new Error("NEON_POSTGRES_URL environment variable is not set")
 }
 
-async function executeQuery(query: string, params: any[] = []): Promise<any[]> {
-  const connectionString = process.env.NEON_POSTGRES_URL
-
-  if (!connectionString) {
-    throw new Error("NEON_POSTGRES_URL environment variable is not set")
-  }
-
-  // Parse connection string to get HTTP endpoint
-  // Format: postgres://user:pass@host/db
-  const url = new URL(connectionString.replace("postgres://", "https://"))
-  const [user, password] = url.username && url.password ? [url.username, decodeURIComponent(url.password)] : ["", ""]
-
-  const host = url.hostname
-  const database = url.pathname.slice(1)
-
-  // Use Neon's HTTP API
-  const httpEndpoint = `https://${host}/sql`
-
-  try {
-    const response = await fetch(httpEndpoint, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${password}`,
-      },
-      body: JSON.stringify({
-        query,
-        params,
-      }),
-    })
-
-    if (!response.ok) {
-      const error = await response.text()
-      throw new Error(`Database query failed: ${error}`)
-    }
-
-    const result: QueryResult = await response.json()
-    return result.rows || []
-  } catch (error) {
-    console.error("[v0] Database query error:", error)
-    throw error
-  }
-}
-
-// SQL template tag function
-function sql(strings: TemplateStringsArray, ...values: any[]) {
-  let query = ""
-  const params: any[] = []
-
-  for (let i = 0; i < strings.length; i++) {
-    query += strings[i]
-    if (i < values.length) {
-      params.push(values[i])
-      query += `$${params.length}`
-    }
-  }
-
-  return executeQuery(query, params)
-}
+const sql = neon(connectionString)
 
 export { sql }
 

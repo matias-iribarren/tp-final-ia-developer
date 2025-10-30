@@ -62,12 +62,17 @@ npm install
 \`\`\`
 
 3. Set up your environment variables:
-   - The Neon integration should already be connected
-   - Verify environment variables in the Vercel dashboard
+   - Create a `.env.local` file in the root directory
+   - Add your Neon connection string:
+     ```
+     NEON_POSTGRES_URL="your_neon_connection_string_here"
+     ```
 
 4. Run the database migrations:
-   - The SQL scripts in the `scripts` folder will set up your database schema
-   - Execute them in order: `001-create-schema.sql`, then `002-seed-data.sql`
+   ```bash
+   npm run create-schema
+   ```
+   This will create all necessary tables and structures in your database.
 
 5. Start the development server:
 \`\`\`bash
@@ -77,6 +82,8 @@ npm run dev
 6. Open [http://localhost:3000](http://localhost:3000) in your browser
 
 ### Creating an Admin User
+
+**⚠️ Important**: Make sure you've run `npm run create-schema` first!
 
 To create an admin user for testing, run:
 

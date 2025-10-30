@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "build": "next build",
+    "create-schema": "npx tsx scripts/create-schema.ts",
+    "setup-db": "npx tsx scripts/create-schema.ts",
     "create-admin": "tsx scripts/create-admin-user.ts",
     "dev": "next dev",
     "lint": "eslint .",
@@ -70,6 +72,7 @@
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "dotenv": "^17.2.3",
     "postcss": "^8.5",
     "tailwindcss": "^4.1.9",
     "tw-animate-css": "1.3.3",

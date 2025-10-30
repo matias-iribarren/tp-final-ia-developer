@@ -11,14 +11,22 @@ export const auth = {
   async createUser(email: string, password: string, name: string) {
     // Hash password (in production, use bcrypt or similar)
     const hashedPassword = await hashPassword(password)
+    
+    // Generate a unique ID
+    const userId = crypto.randomUUID()
+    
+    // Create raw_json with the correct structure for generated columns
+    const rawJson = {
+      id: userId,
+      primary_email: email,
+      display_name: name,
+      signed_up_at_millis: Date.now(),
+      password: hashedPassword
+    }
 
     const result = await sql`
-      INSERT INTO neon_auth.users_sync (email, name, raw_json)
-      VALUES (
-        ${email}, 
-        ${name}, 
-        ${JSON.stringify({ password: hashedPassword })}
-      )
+      INSERT INTO neon_auth.users_sync (raw_json)
+      VALUES (${JSON.stringify(rawJson)})
       RETURNING id, email, name, created_at
     `
 
@@ -29,7 +37,7 @@ export const auth = {
     const result = await sql`
       SELECT id, email, name, raw_json
       FROM neon_auth.users_sync
-      WHERE email = ${email} AND deleted_at IS NULL
+      WHERE raw_json->>'primary_email' = ${email} AND deleted_at IS NULL
     `
 
     if (result.length === 0) {
@@ -60,7 +68,7 @@ export const auth = {
     const result = await sql`
       SELECT id, email, name, created_at
       FROM neon_auth.users_sync
-      WHERE id = ${userId} AND deleted_at IS NULL
+      WHERE raw_json->>'id' = ${userId} AND deleted_at IS NULL
     `
 
     return result[0] || null
@@ -70,7 +78,7 @@ export const auth = {
     const result = await sql`
       SELECT id, email, name, created_at
       FROM neon_auth.users_sync
-      WHERE email = ${email} AND deleted_at IS NULL
+      WHERE raw_json->>'primary_email' = ${email} AND deleted_at IS NULL
     `
 
     return result[0] || null

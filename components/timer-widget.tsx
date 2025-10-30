@@ -6,17 +6,19 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { startTimer, stopTimer } from "@/app/actions/time-entries"
-import type { TimeEntry, Project } from "@/lib/types"
+import type { TimeEntry, Project, Task } from "@/lib/types"
 
 interface TimerWidgetProps {
   workspaceId: string
   activeEntry: TimeEntry | null
   projects: Project[]
+  tasksByProject: Record<string, Task[]>
 }
 
-export function TimerWidget({ workspaceId, activeEntry, projects }: TimerWidgetProps) {
+export function TimerWidget({ workspaceId, activeEntry, projects, tasksByProject }: TimerWidgetProps) {
   const [description, setDescription] = useState("")
   const [projectId, setProjectId] = useState<string>("none")
+  const [taskId, setTaskId] = useState<string>("")
   const [isLoading, setIsLoading] = useState(false)
   const [elapsedTime, setElapsedTime] = useState(0)
 
@@ -41,10 +43,17 @@ export function TimerWidget({ workspaceId, activeEntry, projects }: TimerWidgetP
   async function handleStart() {
     setIsLoading(true)
 
+    if (projectId === "none" || !taskId) {
+      alert("Seleccioná un proyecto y una tarea para iniciar el temporizador")
+      setIsLoading(false)
+      return
+    }
+
     const formData = new FormData()
     formData.append("workspaceId", workspaceId)
     formData.append("description", description)
-    if (projectId !== "none") formData.append("projectId", projectId)
+    formData.append("projectId", projectId)
+    formData.append("taskId", taskId)
 
     const result = await startTimer(formData)
 
@@ -53,6 +62,7 @@ export function TimerWidget({ workspaceId, activeEntry, projects }: TimerWidgetP
     } else {
       setDescription("")
       setProjectId("none")
+      setTaskId("")
     }
 
     setIsLoading(false)
@@ -105,6 +115,23 @@ export function TimerWidget({ workspaceId, activeEntry, projects }: TimerWidgetP
                   <div className="h-3 w-3 rounded-full" style={{ backgroundColor: project.color }} />
                   {project.name}
                 </div>
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+
+        <Select
+          value={taskId}
+          onValueChange={setTaskId}
+          disabled={!!activeEntry || isLoading || projectId === "none"}
+        >
+          <SelectTrigger className="w-[200px]">
+            <SelectValue placeholder="Select task" />
+          </SelectTrigger>
+          <SelectContent>
+            {(projectId !== "none" ? tasksByProject[projectId] || [] : []).map((task) => (
+              <SelectItem key={task.id} value={task.id}>
+                {task.name}
               </SelectItem>
             ))}
           </SelectContent>
