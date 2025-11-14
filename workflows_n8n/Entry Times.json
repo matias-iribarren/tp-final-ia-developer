@@ -10,10 +10,10 @@
       "type": "n8n-nodes-base.dateTime",
       "typeVersion": 2,
       "position": [
-        -1440,
-        448
+        -1360,
+        2192
       ],
-      "id": "80b6320b-aa2c-49e4-87a1-6a2a89bb4c25",
+      "id": "81164d0c-f057-4ceb-b32c-5c15fb8096c5",
       "name": "Date & Time"
     },
     {
@@ -27,10 +27,10 @@
       "type": "n8n-nodes-base.dateTime",
       "typeVersion": 2,
       "position": [
-        -1232,
-        448
+        -1152,
+        2192
       ],
-      "id": "e36ad4e3-ec1c-40dd-a145-aaefffc9125b",
+      "id": "e6d6750d-1eda-4624-a5cb-94f0f69cd06a",
       "name": "Date & Time1"
     },
     {
@@ -41,10 +41,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        -480,
-        -1440
+        -400,
+        304
       ],
-      "id": "d032252d-1b19-429a-9169-731559cd12d3",
+      "id": "89307b75-5181-444e-a0d5-74b4fdce261b",
       "name": "HTTP Request"
     },
     {
@@ -56,14 +56,14 @@
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 1.8,
       "position": [
-        -80,
-        -1440
+        0,
+        304
       ],
-      "id": "4bcf4ceb-c610-49d5-98de-5aa5e20f4d0c",
+      "id": "0f5a6068-cb2f-41ec-9d21-49a7dfdeff68",
       "name": "OpenAI1",
       "credentials": {
         "openAiApi": {
-          "id": "TcKNZzNDBjGnGf1V",
+          "id": "oUk2ETNAobVr6OJB",
           "name": "OpenAi account"
         }
       }
@@ -85,10 +85,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        512,
-        -1440
+        592,
+        304
       ],
-      "id": "0df685b8-4a0f-40d0-b013-fa7607d76a7d",
+      "id": "1c5f708f-558c-440e-b546-ac4e25923dae",
       "name": "Edit Fields"
     },
     {
@@ -108,10 +108,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -80,
-        -1168
+        0,
+        576
       ],
-      "id": "aaa422f4-8ccd-4c46-aef9-8aee940dc360",
+      "id": "71b697b2-b47a-47d8-844f-fbd865945c62",
       "name": "Edit Fields1"
     },
     {
@@ -131,10 +131,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        864,
-        -1440
+        944,
+        304
       ],
-      "id": "3becb001-2ba8-4cc9-8f4b-fa6c2a6c4a30",
+      "id": "544e97c9-5424-459c-82b3-a76879056b1e",
       "name": "pregunta_final"
     },
     {
@@ -147,10 +147,10 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2,
       "position": [
-        -2368,
-        288
+        -2288,
+        2032
       ],
-      "id": "10c5868f-b75f-4883-bdfc-68c57304366a",
+      "id": "9bf1a0fa-0baa-415c-83a2-7a369c2be5c7",
       "name": "Webhook",
       "webhookId": "415ee149-1ccb-48b0-815b-937c16444717"
     },
@@ -163,10 +163,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -80,
-        -880
+        0,
+        864
       ],
-      "id": "5002e6e2-e5db-4ace-9c17-83cc0d00314e",
+      "id": "58b4cb5d-b273-4c3a-8fdf-8e2a06758bb3",
       "name": "Edit Fields7"
     },
     {
@@ -178,10 +178,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -80,
-        -1744
+        0,
+        0
       ],
-      "id": "06b9105e-d607-4a1b-a487-37dc2ef25f7f",
+      "id": "a845a9ce-ad70-47f5-bfaf-7c9e83132d56",
       "name": "Edit Fields8"
     },
     {
@@ -316,10 +316,10 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.2,
       "position": [
-        -992,
-        -1360
+        -912,
+        384
       ],
-      "id": "1af9c8b0-370a-4f7e-8727-6874d99bc15e",
+      "id": "d81b8952-6cc9-4880-92f6-129d190f8b64",
       "name": "Switch"
     },
     {
@@ -332,14 +332,14 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        32,
-        448
+        112,
+        2192
       ],
-      "id": "8851f744-0a5c-4c3d-aafc-6a6c20fe5b42",
+      "id": "3a7899f9-fb5c-4439-92ce-9918fae7b631",
       "name": "Redis",
       "credentials": {
         "redis": {
-          "id": "1gTM5WfQr10J0DDL",
+          "id": "lwzQpQohbwXl9kva",
           "name": "Redis account"
         }
       }
@@ -351,10 +351,10 @@
       "type": "n8n-nodes-base.wait",
       "typeVersion": 1.1,
       "position": [
-        336,
-        448
+        416,
+        2192
       ],
-      "id": "328b7654-8f31-441a-9560-30331f8dfd66",
+      "id": "54b427ea-9680-4ece-995e-7b2b14f40584",
       "name": "Wait1",
       "webhookId": "822b127c-ca5c-4c8c-bfb6-d6b3504397e7"
     },
@@ -368,14 +368,14 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        560,
-        448
+        640,
+        2192
       ],
-      "id": "27500832-abeb-48fb-a271-39731e36c47a",
+      "id": "31e4851a-2468-4b7c-bff1-92d4161d4769",
       "name": "Redis1",
       "credentials": {
         "redis": {
-          "id": "1gTM5WfQr10J0DDL",
+          "id": "lwzQpQohbwXl9kva",
           "name": "Redis account"
         }
       }
@@ -385,10 +385,10 @@
       "type": "n8n-nodes-base.noOp",
       "typeVersion": 1,
       "position": [
-        896,
-        608
+        976,
+        2352
       ],
-      "id": "591521b6-4e8e-4d66-b28c-1e544c632b0c",
+      "id": "e80885de-4101-4b1f-b0dd-651c57f44f20",
       "name": "No Operation, do nothing"
     },
     {
@@ -408,10 +408,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        1040,
-        432
+        1120,
+        2176
       ],
-      "id": "b8881529-c150-4224-918a-3e61236377c0",
+      "id": "6803c6a7-1dbf-4fb0-9b62-9b0203abc0a3",
       "name": "pregunta_usuario"
     },
     {
@@ -422,14 +422,14 @@
       "type": "n8n-nodes-base.redis",
       "typeVersion": 1,
       "position": [
-        1312,
-        432
+        1392,
+        2176
       ],
-      "id": "0b344759-2678-40ce-84c3-4053e7aed00e",
+      "id": "c5e76983-490e-4789-83fb-e7038eeb6a47",
       "name": "Redis2",
       "credentials": {
         "redis": {
-          "id": "1gTM5WfQr10J0DDL",
+          "id": "lwzQpQohbwXl9kva",
           "name": "Redis account"
         }
       }
@@ -462,10 +462,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        784,
-        448
+        864,
+        2192
       ],
-      "id": "7ac30f3d-0736-4734-92c6-e32c5746b164",
+      "id": "5ac44082-d96b-4751-a54b-1ac1d79555e9",
       "name": "If1"
     },
     {
@@ -473,16 +473,16 @@
         "promptType": "define",
         "text": "=Input: {{ $('pregunta_usuario').item.json.response }}",
         "options": {
-          "systemMessage": "=# Prompt Base para el Bot de n8n (Integración Clocky)\n\nEste prompt está diseñado para ser utilizado en un nodo de IA (LLM) dentro de n8n. Su objetivo es transformar descripciones de tareas en lenguaje natural en objetos JSON estructurados, listos para ser enviados a la API de Clocky para la creación de entradas de tiempo.\n\n---\n\n```\nEres un asistente experto diseñado para procesar descripciones de tareas en lenguaje natural y convertirlas en objetos JSON estructurados para una API de seguimiento de tiempo.\n\n**Información de Contexto:**\nEl usuario proporcionará una descripción en lenguaje natural de sus tareas diarias.\nTambién se te proporcionará un objeto JSON que contiene listas de proyectos, clientes y etiquetas disponibles de la aplicación de seguimiento de tiempo. DEBES usar el `id` de estas listas al asignar `project_id` o `tag_ids`.\n\n**Datos Disponibles (formato JSON - proporcionados por el endpoint GET de la API de Clocky):**\nPara esto  llama a la tool \"listar tareas\"\n```json\n{\n  \"projects\": [\n    { \"id\": \"uuid-proyecto-1\", \"name\": \"Clocky Frontend\", \"client_id\": \"uuid-cliente-a\" },\n    { \"id\": \"uuid-proyecto-2\", \"name\": \"Clocky Backend\", \"client_id\": \"uuid-cliente-a\" },\n    { \"id\": \"uuid-proyecto-3\", \"name\": \"Campaña de Marketing\", \"client_id\": \"uuid-cliente-b\" }\n  ],\n  \"clients\": [\n    { \"id\": \"uuid-cliente-a\", \"name\": \"Acme Corp\" },\n    { \"id\": \"uuid-cliente-b\", \"name\": \"Globex Inc\" }\n  ],\n  \"tags\": [\n    { \"id\": \"uuid-tag-1\", \"name\": \"Desarrollo\" },\n    { \"id\": \"uuid-tag-2\", \"name\": \"Reunión\" },\n    { \"id\": \"uuid-tag-3\", \"name\": \"Investigación\" }\n  ]\n}\n```\n\n**Tu Tarea:**\n1.  **Analiza la entrada del usuario** para identificar tareas individuales, sus descripciones y sus duraciones (en horas o minutos).\n2.  **Empareja los nombres de proyectos** de la entrada del usuario con el campo `name` en la lista `projects`. Si se encuentra una coincidencia clara, usa su `id` como `project_id`. Si no se menciona ningún proyecto explícitamente o la coincidencia no es clara, establece `project_id` en `null`.\n3.  **Empareja los nombres de etiquetas** de la entrada del usuario con el campo `name` en la lista `tags`. Si se encuentran coincidencias, incluye sus `id`s en el array `tag_ids`. Si no se mencionan etiquetas, `tag_ids` puede ser un array vacío u omitirse.\n4.  **Calcula `start_time` y `end_time`**:\n    *   Asume que todas las tareas se completaron **hoy**.\n    *   El `end_time` para la *última* tarea debe ser `[HORA_ACTUAL_ISO]` (ej., \"2025-11-13T15:30:00.000Z\").\n    *   Calcula `start_time` restando la duración de la tarea de su `end_time`.\n    *   Si se describen múltiples tareas, asume que se realizaron secuencialmente, trabajando hacia atrás desde la `[HORA_ACTUAL_ISO]`.\n    *   Todos los tiempos deben estar en formato ISO 8601 (ej., \"YYYY-MM-DDTHH:mm:ss.SSSZ\").\n5.  **Parámetros Fijos:**\n    *   `workspace_id`: `[TU_WORKSPACE_ID]`\n    *   `user_id`: `[TU_USER_ID]`\n    *   `billable`: Siempre `true` a menos que el usuario indique explícitamente lo contrario (ej., \"no facturable\").\n\n**Formato de Salida:**\nTu respuesta DEBE ser un array JSON de objetos de entrada de tiempo. Cada objeto en el array debe adherirse estrictamente a la siguiente estructura. NO incluyas ningún texto conversacional, explicaciones o markdown fuera del array JSON.\n\n```json\n[\n  {\n    \"workspace_id\": \"string (UUID)\",\n    \"user_id\": \"string\",\n    \"project_id\": \"string (UUID) | null\",\n    \"description\": \"string\",\n    \"start_time\": \"string (ISO 8601 datetime)\",\n    \"end_time\": \"string (ISO 8601 datetime) | null\",\n    \"billable\": \"boolean\",\n    \"tag_ids\": \"array of string (UUID) | optional\"\n  }\n]\n```\n\n**Ejemplo de Entrada del Usuario:**\n\"Hoy trabajé 2.5 horas en el frontend de Clocky, implementando la nueva API. Luego tuve una reunión de 1 hora sobre el proyecto de Marketing.\"\n\n**Ejemplo de Salida Esperada (asumiendo que la hora actual es 2025-11-13T18:00:00.000Z, y usando IDs de ejemplo):**\n```json\n[\n  {\n    \"workspace_id\": \"workspace-1\",\n    \"user_id\": \"60c7a902-aeae-4a42-8d26-38f7570b429c\",\n    \"project_id\": \"uuid-proyecto-3\",\n    \"description\": \"reunión sobre el proyecto de Marketing\",\n    \"start_time\": \"2025-11-13T17:00:00.000Z\",\n    \"end_time\": \"2025-11-13T18:00:00.000Z\",\n    \"billable\": true\n  },\n  {\n    \"workspace_id\": \"workspace-1\",\n    \"user_id\": \"60c7a902-aeae-4a42-8d26-38f7570b429c\",\n    \"project_id\": \"uuid-proyecto-1\",\n    \"description\": \"implementando la nueva API\",\n    \"start_time\": \"2025-11-13T14:30:00.000Z\",\n    \"end_time\": \"2025-11-13T17:00:00.000Z\",\n    \"billable\": true,\n    \"tag_ids\": [\"uuid-tag-1\"]\n  }\n]\n```\n\n"
+          "systemMessage": "=# Prompt Base para el Bot de n8n (Integración Clocky)\n\nEste prompt está diseñado para ser utilizado en un nodo de IA (LLM) dentro de n8n. Su objetivo es transformar descripciones de tareas en lenguaje natural en objetos JSON estructurados, listos para ser enviados a la API de Clocky para la creación de entradas de tiempo.\n\n---\n\n```\nEres un asistente experto diseñado para procesar descripciones de tareas en lenguaje natural y convertirlas en objetos JSON estructurados para una API de seguimiento de tiempo.\n\n**Información de Contexto:**\nEl usuario proporcionará una descripción en lenguaje natural de sus tareas diarias.\nTambién se te proporcionará un objeto JSON que contiene listas de proyectos, clientes y etiquetas disponibles de la aplicación de seguimiento de tiempo. DEBES usar el `id` de estas listas al asignar `project_id` o `tag_ids`.\n\n**Datos Disponibles (formato JSON - proporcionados por el endpoint GET de la API de Clocky):**\nPara esto  llama a la tool \"listar tareas\"\n```json\n{\n  \"projects\": [\n    { \"id\": \"uuid-proyecto-1\", \"name\": \"Clocky Frontend\", \"client_id\": \"uuid-cliente-a\" },\n    { \"id\": \"uuid-proyecto-2\", \"name\": \"Clocky Backend\", \"client_id\": \"uuid-cliente-a\" },\n    { \"id\": \"uuid-proyecto-3\", \"name\": \"Campaña de Marketing\", \"client_id\": \"uuid-cliente-b\" }\n  ],\n  \"clients\": [\n    { \"id\": \"uuid-cliente-a\", \"name\": \"Acme Corp\" },\n    { \"id\": \"uuid-cliente-b\", \"name\": \"Globex Inc\" }\n  ],\n  \"tags\": [\n    { \"id\": \"uuid-tag-1\", \"name\": \"Desarrollo\" },\n    { \"id\": \"uuid-tag-2\", \"name\": \"Reunión\" },\n    { \"id\": \"uuid-tag-3\", \"name\": \"Investigación\" }\n  ]\n}\n```\n\n**Tu Tarea:**\n1.  **Analiza la entrada del usuario** para identificar tareas individuales, sus descripciones y sus duraciones (en horas o minutos).\n2.  **Empareja los nombres de proyectos** de la entrada del usuario con el campo `name` en la lista `projects`. Si se encuentra una coincidencia clara, usa su `id` como `project_id`. Si no se menciona ningún proyecto explícitamente o la coincidencia no es clara, establece `project_id` en `null`.\n3.  **Empareja los nombres de etiquetas** de la entrada del usuario con el campo `name` en la lista `tags`. Si se encuentran coincidencias, incluye sus `id`s en el array `tag_ids`. Si no se mencionan etiquetas, `tag_ids` puede ser un array vacío u omitirse.\n4.  **Calcula `start_time` y `end_time`**:\n    *   Asume que todas las tareas se completaron **hoy**.\n    *   El `end_time` para la *última* tarea debe ser `[HORA_ACTUAL_ISO]` (ej., \"2025-11-13T15:30:00.000Z\").\n    *   Calcula `start_time` restando la duración de la tarea de su `end_time`.\n    *   Si se describen múltiples tareas, asume que se realizaron secuencialmente, trabajando hacia atrás desde la `[HORA_ACTUAL_ISO]`.\n    *   Todos los tiempos deben estar en formato ISO 8601 (ej., \"YYYY-MM-DDTHH:mm:ss.SSSZ\").\n5.  **Parámetros Fijos:**\n    *   `workspace_id`: `[TU_WORKSPACE_ID]`\n    *   `user_id`: `[TU_USER_ID]`\n    *   `billable`: Siempre `true` a menos que el usuario indique explícitamente lo contrario (ej., \"no facturable\").\n\n**Formato de Salida:**\nTu respuesta DEBE ser un array JSON de objetos de entrada de tiempo. Cada objeto en el array debe adherirse estrictamente a la siguiente estructura. NO incluyas ningún texto conversacional, explicaciones o markdown fuera del array JSON.\n\n```json\n[\n  {\n    \"workspace_id\": \"string (UUID)\",\n    \"user_id\": \"string\",\n    \"project_id\": \"string (UUID) | null\",\n    \"description\": \"string\",\n    \"start_time\": \"string (ISO 8601 datetime)\",\n    \"end_time\": \"string (ISO 8601 datetime) | null\",\n    \"billable\": \"boolean\",\n    \"tag_ids\": \"array of string (UUID) | optional\"\n  }\n]\n```\nPara creart las entradas de tiempo llama a la tool cargar_horas \n\nSi no tenes workspace usa por defecto el valor workspace-1\nSi no tenes cliente usa por defecto el valor 60c7a902-aeae-4a42-8d26-38f7570b429c\nSi no tenes billieable usa por defecto el valor true\n\n**Ejemplo de Entrada del Usuario:**\n\"Hoy trabajé 2.5 horas en el frontend de Clocky, implementando la nueva API. Luego tuve una reunión de 1 hora sobre el proyecto de Marketing.\"\n\n**Ejemplo de Salida Esperada (asumiendo que la hora actual es 2025-11-13T18:00:00.000Z, y usando IDs de ejemplo):**\n```json\n[\n  {\n    \"workspace_id\": \"workspace-1\",\n    \"user_id\": \"60c7a902-aeae-4a42-8d26-38f7570b429c\",\n    \"project_id\": \"uuid-proyecto-3\",\n    \"description\": \"reunión sobre el proyecto de Marketing\",\n    \"start_time\": \"2025-11-13T17:00:00.000Z\",\n    \"end_time\": \"2025-11-13T18:00:00.000Z\",\n    \"billable\": true\n  },\n  {\n    \"workspace_id\": \"workspace-1\",\n    \"user_id\": \"60c7a902-aeae-4a42-8d26-38f7570b429c\",\n    \"project_id\": \"uuid-proyecto-1\",\n    \"description\": \"implementando la nueva API\",\n    \"start_time\": \"2025-11-13T14:30:00.000Z\",\n    \"end_time\": \"2025-11-13T17:00:00.000Z\",\n    \"billable\": true,\n    \"tag_ids\": [\"uuid-tag-1\"]\n  }\n]\n```\n\n"
         }
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 1.9,
       "position": [
-        1616,
-        496
+        1696,
+        2240
       ],
-      "id": "2c8004bb-e972-4f2c-847b-611ebf031c85",
+      "id": "35671115-da73-49a7-81ba-647b43c423cc",
       "name": "AI Agent"
     },
     {
@@ -493,10 +493,10 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.2,
       "position": [
-        3344,
-        48
+        3424,
+        1792
       ],
-      "id": "af079a97-2a5f-4f8a-8a20-00dca9f53b24",
+      "id": "edc40589-4089-4b06-9cd2-4ac8ae481ad4",
       "name": "Respond to Webhook",
       "notesInFlow": false,
       "alwaysOutputData": false
@@ -509,10 +509,10 @@
       "type": "@n8n/n8n-nodes-langchain.chat",
       "typeVersion": 1,
       "position": [
-        2032,
-        432
+        2112,
+        2176
       ],
-      "id": "13ef3524-cfa4-4295-8384-85c1c80b737b",
+      "id": "5800c302-80c7-41e9-b743-cfb3907c7886",
       "name": "Respond to Chat",
       "alwaysOutputData": false,
       "executeOnce": false,
@@ -531,14 +531,14 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "typeVersion": 1.2,
       "position": [
-        1440,
-        672
+        1520,
+        2416
       ],
-      "id": "daf65328-d8ab-42e5-8bb1-ce7b752ec38a",
+      "id": "e4f48ff3-6ac5-4dfa-b078-1f63532b5f56",
       "name": "OpenAI Chat Model",
       "credentials": {
         "openAiApi": {
-          "id": "TcKNZzNDBjGnGf1V",
+          "id": "oUk2ETNAobVr6OJB",
           "name": "OpenAi account"
         }
       }
@@ -552,10 +552,10 @@
       "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
       "typeVersion": 1.3,
       "position": [
-        1616,
-        672
+        1696,
+        2416
       ],
-      "id": "5991f7f6-c9e8-4cff-8700-e553aca1437e",
+      "id": "aabe1914-93f8-451e-a070-ed5600d83120",
       "name": "Simple Memory"
     },
     {
@@ -565,10 +565,10 @@
       "type": "@n8n/n8n-nodes-langchain.chatTrigger",
       "typeVersion": 1.4,
       "position": [
-        -1728,
-        448
+        -1648,
+        2192
       ],
-      "id": "9c0bc9b7-fa11-405d-95a9-08024c9ee850",
+      "id": "9496de03-f92b-483b-ac9c-355191a10c95",
       "name": "chat",
       "webhookId": "bae96142-5d08-411b-9beb-2cc18f2ccc5f",
       "alwaysOutputData": false,
@@ -594,10 +594,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -704,
-        448
+        -624,
+        2192
       ],
-      "id": "43670532-cd4f-4a39-af77-898d2f3c65bc",
+      "id": "22957129-1410-49ce-aa29-748e4d168cdd",
       "name": "Edit Fields2"
     },
     {
@@ -617,19 +617,19 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -304,
-        448
+        -224,
+        2192
       ],
-      "id": "12323c31-48ae-46b3-a819-3f50791500fb",
+      "id": "b7ef5045-6f7c-42ee-9059-2005c066d85e",
       "name": "pregunta_final1"
     },
     {
       "parameters": {
         "workflowId": {
           "__rl": true,
-          "value": "BWZcZr16yFvAN9nZ",
+          "value": "1MsCGFUQmMEZiy2p",
           "mode": "list",
-          "cachedResultUrl": "/workflow/BWZcZr16yFvAN9nZ",
+          "cachedResultUrl": "/workflow/1MsCGFUQmMEZiy2p",
           "cachedResultName": "list tasks"
         },
         "workflowInputs": {
@@ -648,7 +648,122 @@
               "defaultMatch": false,
               "display": true,
               "canBeUsedToMatch": true,
+              "type": "string"
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        1888,
+        2416
+      ],
+      "id": "7d1bf603-f2d1-422d-b1fb-60bc2a7cfc16",
+      "name": "listar tareas"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "jP852wmah2jWpXQ5",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/jP852wmah2jWpXQ5",
+          "cachedResultName": "cargar_horas"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "workspace_id": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('workspace_id', ``, 'string') }}",
+            "user_id": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('user_id', ``, 'string') }}",
+            "project_id": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('project_id', ``, 'string') }}",
+            "description": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('description', ``, 'string') }}",
+            "start_time": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('start_time', ``, 'string') }}",
+            "end_time": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('end_time', ``, 'string') }}",
+            "tag_ids": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('tag_ids', ``, 'json') }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "workspace_id",
+              "displayName": "workspace_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
               "type": "string",
+              "removed": false
+            },
+            {
+              "id": "user_id",
+              "displayName": "user_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "project_id",
+              "displayName": "project_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "description",
+              "displayName": "description",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "start_time",
+              "displayName": "start_time",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "end_time",
+              "displayName": "end_time",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "billable",
+              "displayName": "billable",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "boolean",
+              "removed": false
+            },
+            {
+              "id": "tag_ids",
+              "displayName": "tag_ids",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "array",
               "removed": false
             }
           ],
@@ -659,11 +774,52 @@
       "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
       "typeVersion": 2.2,
       "position": [
-        1808,
-        672
+        2304,
+        2416
       ],
-      "id": "f0b2511f-85ae-414b-afef-2855ce024220",
-      "name": "listar tareas"
+      "id": "9409d761-5a7e-4ef8-9976-0c21a8508b37",
+      "name": "cargar_horas3"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "jP852wmah2jWpXQ5",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/jP852wmah2jWpXQ5",
+          "cachedResultName": "cargar_horas"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "request": "={{ $fromAI('request', ``, 'json') }}"
+          },
+          "matchingColumns": [
+            "request"
+          ],
+          "schema": [
+            {
+              "id": "request",
+              "displayName": "request",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        2016,
+        2416
+      ],
+      "id": "171a815c-39d3-45eb-8cc0-f8fa641fdc96",
+      "name": "cargar_horas"
     }
   ],
   "pinData": {
@@ -756,11 +912,6 @@
             "index": 0
           }
         ]
-      ]
-    },
-    "Webhook": {
-      "main": [
-        []
       ]
     },
     "Switch": {
@@ -864,11 +1015,6 @@
         ]
       ]
     },
-    "pregunta_final": {
-      "main": [
-        []
-      ]
-    },
     "Redis2": {
       "main": [
         [
@@ -878,16 +1024,6 @@
             "index": 0
           }
         ]
-      ]
-    },
-    "AI Agent": {
-      "main": [
-        []
-      ]
-    },
-    "Respond to Webhook": {
-      "main": [
-        []
       ]
     },
     "OpenAI Chat Model": {
@@ -955,17 +1091,33 @@
           }
         ]
       ]
+    },
+    "cargar_horas3": {
+      "ai_tool": [
+        []
+      ]
+    },
+    "cargar_horas": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": false,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "00c07408-0776-48bf-bbd0-c11377c9a1b8",
+  "versionId": "e43a3f0a-a37d-4c88-9815-2c1cd9ca179d",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "bf8bb83ca1209dbbc7e899e8dca37457a46645c99c41f4c463e859774af2956d"
   },
-  "id": "ezoNE9WWH7ObUX0E",
+  "id": "x6rVSZgbFEWa4BZE",
   "tags": []
 }

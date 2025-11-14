@@ -6,14 +6,14 @@ import { z } from "zod"
 
 // Zod schema for validating a single time entry
 const timeEntrySchema = z.object({
-  workspace_id: z.string().uuid(),
+  workspace_id: z.string(),
   user_id: z.string(),
-  project_id: z.string().uuid().optional(),
+  project_id: z.string().optional(),
   description: z.string().optional(),
   start_time: z.string().datetime(),
   end_time: z.string().datetime().optional(),
   billable: z.boolean().optional().default(true),
-  tag_ids: z.array(z.string().uuid()).optional(),
+  tag_ids: z.array(z.string()).optional(),
 })
 
 // Zod schema for validating the request body (an array of time entries)
