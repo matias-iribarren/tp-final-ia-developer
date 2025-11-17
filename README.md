@@ -1,6 +1,18 @@
-# Clockify Clone
+# Clockify Clone: TP Final
+
+## Integrantes:
+- Adrián Quevedo
+- Ignacio Cano
+- Matías Nehuén Iribarren
+
+---
 
 A full-featured time tracking application built with Next.js, TypeScript, and PostgreSQL (Neon). This is a clone of Clockify with core time tracking, project management, and reporting features.
+
+## Preview URL
+[Link](https://v0-clockify-clone-seven.vercel.app/)
+**User admin:** admin@clockify.com
+**Password:** admin123
 
 ## Features
 
