@@ -11,7 +11,9 @@ A full-featured time tracking application built with Next.js, TypeScript, and Po
 
 ## Preview URL
 [Link](https://v0-clockify-clone-seven.vercel.app/)
+
 **User admin:** admin@clockify.com
+
 **Password:** admin123
 
 ## Features
