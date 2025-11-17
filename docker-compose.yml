@@ -1,0 +1,112 @@
+version: "3.7"
+services:
+  db:
+    image: postgres:14.4
+    hostname: clocky_db
+    container_name: clocky_db
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=user
+      - POSTGRES_DB=clocky_db
+      - TZ=America/Argentina/Buenos_Aires
+    volumes:
+      - db:/var/lib/postgresql/data
+    healthcheck:
+      test: "pg_isready -U ${DATABASE_DATABASE}"
+      interval: 30s
+      start_period: 60s
+    networks:
+      - clocky-network
+    ports:
+      - 5455:5432
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
+        window: 120s
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: n8n
+    environment:
+      - DB_TYPE=postgres
+      - DB_POSTGRESDB_HOST=db
+      - DB_POSTGRESDB_PORT=5432
+      - DB_POSTGRESDB_USER=user
+      - DB_POSTGRESDB_PASSWORD=password
+      - DB_POSTGRESDB_DATABASE=clocky_db
+      - N8N_BASIC_AUTH_ACTIVE=true
+      - N8N_BASIC_AUTH_USER=user_n8n
+      - N8N_BASIC_AUTH_PASSWORD=password
+      - WEBHOOK_TUNNEL_URL=n8n
+      - N8N_HOST=n8n
+      - N8N_PROTOCOL=https
+      - N8N_EDITOR_BASE_URL=n8n
+      - N8N_ENCRYPTION_KEY=encryption_key
+      - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
+      - N8N_SECURE_COOKIE=false
+      - TZ=America/Argentina/Buenos_Aires
+    networks:
+      - clocky-network
+    ports:
+      - 5678:5678
+    volumes:
+      - n8n_data:/home/node/.n8n
+    depends_on:
+      - db
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
+        window: 120s
+
+  redis:
+    image: redis:7.0
+    container_name: redis
+    volumes:
+      - redis:/data
+    command: --requirepass password
+    ports:
+      - "6379:6379"
+    networks:
+      - clocky-network
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
+        window: 120s
+
+  next-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: clocky_next_app
+    ports:
+      - "3003:3000"
+    networks:
+      - clocky-network
+    env_file:
+      - .env
+    depends_on:
+      - db
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
+        window: 120s
+
+volumes:
+  db:
+  n8n_data:
+  redis:
+
+networks:
+  clocky-network:
+    driver: bridge

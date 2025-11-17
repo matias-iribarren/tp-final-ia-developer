@@ -1,0 +1,75 @@
+{
+  "name": "cargar_horas",
+  "nodes": [
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "request",
+              "type": "any"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -1520,
+        144
+      ],
+      "id": "cd9c1ed5-a59c-4cc9-9f29-d62f974ef471",
+      "name": "init_tool"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=http://clocky_next_app:3000/api/time-entries",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $('init_tool').item.json.request }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1232,
+        144
+      ],
+      "id": "228fee37-e021-48bb-bca8-c097b316781b",
+      "name": "Cargar horas",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "uCAIktLu4SRcNkHh",
+          "name": "clocky-api-key"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "init_tool": {
+      "main": [
+        [
+          {
+            "node": "Cargar horas",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "579654fc-6e40-4eff-9989-eaa9a45a597f",
+  "meta": {
+    "instanceId": "bf8bb83ca1209dbbc7e899e8dca37457a46645c99c41f4c463e859774af2956d"
+  },
+  "id": "jP852wmah2jWpXQ5",
+  "tags": []
+}

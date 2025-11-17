@@ -1,0 +1,1123 @@
+{
+  "name": "Entry Times",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {
+          "timezone": "America/Argentina/Buenos_Aires"
+        }
+      },
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 2,
+      "position": [
+        -1360,
+        2192
+      ],
+      "id": "81164d0c-f057-4ceb-b32c-5c15fb8096c5",
+      "name": "Date & Time"
+    },
+    {
+      "parameters": {
+        "operation": "formatDate",
+        "date": "={{ $json.currentDate }}",
+        "format": "custom",
+        "customFormat": "cccc dd-MM-yyyy HH:mm",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dateTime",
+      "typeVersion": 2,
+      "position": [
+        -1152,
+        2192
+      ],
+      "id": "e6d6750d-1eda-4624-a5cb-94f0f69cd06a",
+      "name": "Date & Time1"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.body.lastinput }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -400,
+        304
+      ],
+      "id": "89307b75-5181-444e-a0d5-74b4fdce261b",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "resource": "audio",
+        "operation": "transcribe",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        0,
+        304
+      ],
+      "id": "0f5a6068-cb2f-41ec-9d21-49a7dfdeff68",
+      "name": "OpenAI1",
+      "credentials": {
+        "openAiApi": {
+          "id": "oUk2ETNAobVr6OJB",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "8060533f-a34d-4ed0-965d-f34a97b18f72",
+              "name": "response",
+              "value": "={{ $json.text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        592,
+        304
+      ],
+      "id": "1c5f708f-558c-440e-b546-ac4e25923dae",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "5d28e2a9-2f74-401d-a6a7-8fbd67397349",
+              "name": "response",
+              "value": "={{ $('Webhook').item.json.body.lastinput }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        0,
+        576
+      ],
+      "id": "71b697b2-b47a-47d8-844f-fbd865945c62",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "fc176013-6488-4b5e-a561-e5831639ac36",
+              "name": "pregunta_final",
+              "value": "={{ $json.response }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        944,
+        304
+      ],
+      "id": "544e97c9-5424-459c-82b3-a76879056b1e",
+      "name": "pregunta_final"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "415ee149-1ccb-48b0-815b-937c16444717",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -2288,
+        2032
+      ],
+      "id": "9bf1a0fa-0baa-415c-83a2-7a369c2be5c7",
+      "name": "Webhook",
+      "webhookId": "415ee149-1ccb-48b0-815b-937c16444717"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "{\n  \"output\": \"No tengo permitido procesar archivos\"\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        0,
+        864
+      ],
+      "id": "58b4cb5d-b273-4c3a-8fdf-8e2a06758bb3",
+      "name": "Edit Fields7"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "{\n  \"output\": \"No tengo permitido procesar imagenes\"\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        0,
+        0
+      ],
+      "id": "a845a9ce-ad70-47f5-bfaf-7c9e83132d56",
+      "name": "Edit Fields8"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Webhook').item.json.body.lastinput }}",
+                    "rightValue": ".mp3",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    },
+                    "id": "e8f6085e-25f4-407c-8f4c-914fc8cfe050"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "audio"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "c37e5ede-b2ed-4bee-9d3d-702f9d09661d",
+                    "leftValue": "={{ $('Webhook').item.json.body.lastinput }}",
+                    "rightValue": ".png",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "imagen"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "b8e3727e-ee85-409f-98b2-5933d99b2aff",
+                    "leftValue": "={{ $('Webhook').item.json.body.lastinput }}",
+                    "rightValue": ".jpeg",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "imagen"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "7b414b62-ff93-4d6e-b966-22a0253f7a1c",
+                    "leftValue": "={{ $('Webhook').item.json.body.lastinput }}",
+                    "rightValue": ".pdf",
+                    "operator": {
+                      "type": "string",
+                      "operation": "contains"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "pdf"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "935598bd-a1f6-42ca-a322-be9a5e64298e",
+                    "leftValue": "={{ $('chat').item.json.chatInput }}",
+                    "rightValue": "texto",
+                    "operator": {
+                      "type": "string",
+                      "operation": "notEmpty",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "texto"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        -912,
+        384
+      ],
+      "id": "d81b8952-6cc9-4880-92f6-129d190f8b64",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "operation": "push",
+        "list": "={{ $('chat').item.json.sessionId }}",
+        "messageData": "={{ $('pregunta_final1').item.json.pregunta_final}}",
+        "tail": true
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        112,
+        2192
+      ],
+      "id": "3a7899f9-fb5c-4439-92ce-9918fae7b631",
+      "name": "Redis",
+      "credentials": {
+        "redis": {
+          "id": "lwzQpQohbwXl9kva",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "amount": 1
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        416,
+        2192
+      ],
+      "id": "54b427ea-9680-4ece-995e-7b2b14f40584",
+      "name": "Wait1",
+      "webhookId": "822b127c-ca5c-4c8c-bfb6-d6b3504397e7"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "propertyName": "message",
+        "key": "={{ $('chat').item.json.sessionId }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        640,
+        2192
+      ],
+      "id": "31e4851a-2468-4b7c-bff1-92d4161d4769",
+      "name": "Redis1",
+      "credentials": {
+        "redis": {
+          "id": "lwzQpQohbwXl9kva",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        976,
+        2352
+      ],
+      "id": "e80885de-4101-4b1f-b0dd-651c57f44f20",
+      "name": "No Operation, do nothing"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "34346625-cd49-466e-b3d2-1225bf1f6fd9",
+              "name": "response",
+              "value": "={{ $('Redis1').item.json.message.join() }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1120,
+        2176
+      ],
+      "id": "6803c6a7-1dbf-4fb0-9b62-9b0203abc0a3",
+      "name": "pregunta_usuario"
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "key": "={{ $('chat').item.json.sessionId }}"
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        1392,
+        2176
+      ],
+      "id": "c5e76983-490e-4789-83fb-e7038eeb6a47",
+      "name": "Redis2",
+      "credentials": {
+        "redis": {
+          "id": "lwzQpQohbwXl9kva",
+          "name": "Redis account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "a706c46b-2955-4b1c-ad9d-0902e22d8b80",
+              "leftValue": "={{ $json.message.last() }}",
+              "rightValue": "={{ $('pregunta_final1').item.json.pregunta_final}}",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        864,
+        2192
+      ],
+      "id": "5ac44082-d96b-4751-a54b-1ac1d79555e9",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Input: {{ $('pregunta_usuario').item.json.response }}",
+        "options": {
+          "systemMessage": "=# Prompt Base para el Bot de n8n (Integración Clocky)\n\nEste prompt está diseñado para ser utilizado en un nodo de IA (LLM) dentro de n8n. Su objetivo es transformar descripciones de tareas en lenguaje natural en objetos JSON estructurados, listos para ser enviados a la API de Clocky para la creación de entradas de tiempo.\n\n---\n\n```\nEres un asistente experto diseñado para procesar descripciones de tareas en lenguaje natural y convertirlas en objetos JSON estructurados para una API de seguimiento de tiempo.\n\n**Información de Contexto:**\nEl usuario proporcionará una descripción en lenguaje natural de sus tareas diarias.\nTambién se te proporcionará un objeto JSON que contiene listas de proyectos, clientes y etiquetas disponibles de la aplicación de seguimiento de tiempo. DEBES usar el `id` de estas listas al asignar `project_id` o `tag_ids`.\n\n**Datos Disponibles (formato JSON - proporcionados por el endpoint GET de la API de Clocky):**\nPara esto  llama a la tool \"listar tareas\"\n```json\n{\n  \"projects\": [\n    { \"id\": \"uuid-proyecto-1\", \"name\": \"Clocky Frontend\", \"client_id\": \"uuid-cliente-a\" },\n    { \"id\": \"uuid-proyecto-2\", \"name\": \"Clocky Backend\", \"client_id\": \"uuid-cliente-a\" },\n    { \"id\": \"uuid-proyecto-3\", \"name\": \"Campaña de Marketing\", \"client_id\": \"uuid-cliente-b\" }\n  ],\n  \"clients\": [\n    { \"id\": \"uuid-cliente-a\", \"name\": \"Acme Corp\" },\n    { \"id\": \"uuid-cliente-b\", \"name\": \"Globex Inc\" }\n  ],\n  \"tags\": [\n    { \"id\": \"uuid-tag-1\", \"name\": \"Desarrollo\" },\n    { \"id\": \"uuid-tag-2\", \"name\": \"Reunión\" },\n    { \"id\": \"uuid-tag-3\", \"name\": \"Investigación\" }\n  ]\n}\n```\n\n**Tu Tarea:**\n1.  **Analiza la entrada del usuario** para identificar tareas individuales, sus descripciones y sus duraciones (en horas o minutos).\n2.  **Empareja los nombres de proyectos** de la entrada del usuario con el campo `name` en la lista `projects`. Si se encuentra una coincidencia clara, usa su `id` como `project_id`. Si no se menciona ningún proyecto explícitamente o la coincidencia no es clara, establece `project_id` en `null`.\n3.  **Empareja los nombres de etiquetas** de la entrada del usuario con el campo `name` en la lista `tags`. Si se encuentran coincidencias, incluye sus `id`s en el array `tag_ids`. Si no se mencionan etiquetas, `tag_ids` puede ser un array vacío u omitirse.\n4.  **Calcula `start_time` y `end_time`**:\n    *   Asume que todas las tareas se completaron **hoy**.\n    *   El `end_time` para la *última* tarea debe ser `[HORA_ACTUAL_ISO]` (ej., \"2025-11-13T15:30:00.000Z\").\n    *   Calcula `start_time` restando la duración de la tarea de su `end_time`.\n    *   Si se describen múltiples tareas, asume que se realizaron secuencialmente, trabajando hacia atrás desde la `[HORA_ACTUAL_ISO]`.\n    *   Todos los tiempos deben estar en formato ISO 8601 (ej., \"YYYY-MM-DDTHH:mm:ss.SSSZ\").\n5.  **Parámetros Fijos:**\n    *   `workspace_id`: `[TU_WORKSPACE_ID]`\n    *   `user_id`: `[TU_USER_ID]`\n    *   `billable`: Siempre `true` a menos que el usuario indique explícitamente lo contrario (ej., \"no facturable\").\n\n**Formato de Salida:**\nTu respuesta DEBE ser un array JSON de objetos de entrada de tiempo. Cada objeto en el array debe adherirse estrictamente a la siguiente estructura. NO incluyas ningún texto conversacional, explicaciones o markdown fuera del array JSON.\n\n```json\n[\n  {\n    \"workspace_id\": \"string (UUID)\",\n    \"user_id\": \"string\",\n    \"project_id\": \"string (UUID) | null\",\n    \"description\": \"string\",\n    \"start_time\": \"string (ISO 8601 datetime)\",\n    \"end_time\": \"string (ISO 8601 datetime) | null\",\n    \"billable\": \"boolean\",\n    \"tag_ids\": \"array of string (UUID) | optional\"\n  }\n]\n```\nPara creart las entradas de tiempo llama a la tool cargar_horas \n\nSi no tenes workspace usa por defecto el valor workspace-1\nSi no tenes cliente usa por defecto el valor 60c7a902-aeae-4a42-8d26-38f7570b429c\nSi no tenes billieable usa por defecto el valor true\n\n**Ejemplo de Entrada del Usuario:**\n\"Hoy trabajé 2.5 horas en el frontend de Clocky, implementando la nueva API. Luego tuve una reunión de 1 hora sobre el proyecto de Marketing.\"\n\n**Ejemplo de Salida Esperada (asumiendo que la hora actual es 2025-11-13T18:00:00.000Z, y usando IDs de ejemplo):**\n```json\n[\n  {\n    \"workspace_id\": \"workspace-1\",\n    \"user_id\": \"60c7a902-aeae-4a42-8d26-38f7570b429c\",\n    \"project_id\": \"uuid-proyecto-3\",\n    \"description\": \"reunión sobre el proyecto de Marketing\",\n    \"start_time\": \"2025-11-13T17:00:00.000Z\",\n    \"end_time\": \"2025-11-13T18:00:00.000Z\",\n    \"billable\": true\n  },\n  {\n    \"workspace_id\": \"workspace-1\",\n    \"user_id\": \"60c7a902-aeae-4a42-8d26-38f7570b429c\",\n    \"project_id\": \"uuid-proyecto-1\",\n    \"description\": \"implementando la nueva API\",\n    \"start_time\": \"2025-11-13T14:30:00.000Z\",\n    \"end_time\": \"2025-11-13T17:00:00.000Z\",\n    \"billable\": true,\n    \"tag_ids\": [\"uuid-tag-1\"]\n  }\n]\n```\n\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        1696,
+        2240
+      ],
+      "id": "35671115-da73-49a7-81ba-647b43c423cc",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "respondWith": "allIncomingItems",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.2,
+      "position": [
+        3424,
+        1792
+      ],
+      "id": "edc40589-4089-4b06-9cd2-4ac8ae481ad4",
+      "name": "Respond to Webhook",
+      "notesInFlow": false,
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "message": "={{$json.response}}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chat",
+      "typeVersion": 1,
+      "position": [
+        2112,
+        2176
+      ],
+      "id": "5800c302-80c7-41e9-b743-cfb3907c7886",
+      "name": "Respond to Chat",
+      "alwaysOutputData": false,
+      "executeOnce": false,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4.1",
+          "mode": "list",
+          "cachedResultName": "gpt-4.1"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1520,
+        2416
+      ],
+      "id": "e4f48ff3-6ac5-4dfa-b078-1f63532b5f56",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "oUk2ETNAobVr6OJB",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('chat').item.json.sessionId }}",
+        "contextWindowLength": 150
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        1696,
+        2416
+      ],
+      "id": "aabe1914-93f8-451e-a070-ed5600d83120",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        -1648,
+        2192
+      ],
+      "id": "9496de03-f92b-483b-ac9c-355191a10c95",
+      "name": "chat",
+      "webhookId": "bae96142-5d08-411b-9beb-2cc18f2ccc5f",
+      "alwaysOutputData": false,
+      "executeOnce": false,
+      "notesInFlow": false,
+      "retryOnFail": false,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "5d28e2a9-2f74-401d-a6a7-8fbd67397349",
+              "name": "response",
+              "value": "={{ $('chat').item.json.chatInput }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -624,
+        2192
+      ],
+      "id": "22957129-1410-49ce-aa29-748e4d168cdd",
+      "name": "Edit Fields2"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "fc176013-6488-4b5e-a561-e5831639ac36",
+              "name": "pregunta_final",
+              "value": "={{ $json.response }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -224,
+        2192
+      ],
+      "id": "b7ef5045-6f7c-42ee-9059-2005c066d85e",
+      "name": "pregunta_final1"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "1MsCGFUQmMEZiy2p",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/1MsCGFUQmMEZiy2p",
+          "cachedResultName": "list tasks"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "workspace_id": "workspace-1"
+          },
+          "matchingColumns": [
+            "workspace_id"
+          ],
+          "schema": [
+            {
+              "id": "workspace_id",
+              "displayName": "workspace_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string"
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        1888,
+        2416
+      ],
+      "id": "7d1bf603-f2d1-422d-b1fb-60bc2a7cfc16",
+      "name": "listar tareas"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "jP852wmah2jWpXQ5",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/jP852wmah2jWpXQ5",
+          "cachedResultName": "cargar_horas"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "workspace_id": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('workspace_id', ``, 'string') }}",
+            "user_id": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('user_id', ``, 'string') }}",
+            "project_id": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('project_id', ``, 'string') }}",
+            "description": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('description', ``, 'string') }}",
+            "start_time": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('start_time', ``, 'string') }}",
+            "end_time": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('end_time', ``, 'string') }}",
+            "tag_ids": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('tag_ids', ``, 'json') }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "workspace_id",
+              "displayName": "workspace_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "user_id",
+              "displayName": "user_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "project_id",
+              "displayName": "project_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "description",
+              "displayName": "description",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "start_time",
+              "displayName": "start_time",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "end_time",
+              "displayName": "end_time",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "billable",
+              "displayName": "billable",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "boolean",
+              "removed": false
+            },
+            {
+              "id": "tag_ids",
+              "displayName": "tag_ids",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "array",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        2304,
+        2416
+      ],
+      "id": "9409d761-5a7e-4ef8-9976-0c21a8508b37",
+      "name": "cargar_horas3"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "jP852wmah2jWpXQ5",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/jP852wmah2jWpXQ5",
+          "cachedResultName": "cargar_horas"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "request": "={{ $fromAI('request', ``, 'json') }}"
+          },
+          "matchingColumns": [
+            "request"
+          ],
+          "schema": [
+            {
+              "id": "request",
+              "displayName": "request",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        2016,
+        2416
+      ],
+      "id": "171a815c-39d3-45eb-8cc0-f8fa641fdc96",
+      "name": "cargar_horas"
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "34.145.205.107:5679",
+            "x-page-id": "1370947",
+            "accept": "application/json",
+            "userid": "5492494466525",
+            "content-type": "application/x-www-form-urlencoded",
+            "x-user-id": "5492494466525",
+            "x-flowcount": "12.2",
+            "content-length": "24"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "lastinput": "7000 no es 0km"
+          },
+          "webhookUrl": "https://34.145.205.107:5679:5678/webhook/415ee149-1ccb-48b0-815b-937c16444717",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Date & Time": {
+      "main": [
+        [
+          {
+            "node": "Date & Time1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Date & Time1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "OpenAI1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "pregunta_final",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "pregunta_final",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields8",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields8",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields7",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis": {
+      "main": [
+        [
+          {
+            "node": "Wait1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait1": {
+      "main": [
+        [
+          {
+            "node": "Redis1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis1": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "pregunta_usuario": {
+      "main": [
+        [
+          {
+            "node": "Redis2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "pregunta_usuario",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Operation, do nothing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redis2": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "chat": {
+      "main": [
+        [
+          {
+            "node": "Date & Time",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields2": {
+      "main": [
+        [
+          {
+            "node": "pregunta_final1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "pregunta_final1": {
+      "main": [
+        [
+          {
+            "node": "Redis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "listar tareas": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "cargar_horas3": {
+      "ai_tool": [
+        []
+      ]
+    },
+    "cargar_horas": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "e43a3f0a-a37d-4c88-9815-2c1cd9ca179d",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "bf8bb83ca1209dbbc7e899e8dca37457a46645c99c41f4c463e859774af2956d"
+  },
+  "id": "x6rVSZgbFEWa4BZE",
+  "tags": []
+}
