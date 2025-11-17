@@ -204,43 +204,6 @@ The application uses Next.js Server Actions for API functionality:
 - `getReport(workspaceId, startDate, endDate)` - Generate a report
 - `exportToCSV(workspaceId, startDate, endDate)` - Export report to CSV
 
-### Automation with n8n
-
-A new API has been added to facilitate time logging from external systems through [n8n](https://n8n.io/), a workflow automation tool.
-
-#### Time Entries API
-
-- **Endpoint**: `POST /api/time-entries`
-  - **Description**: Allows creating one or more time entries in a single request.
-  - **Authentication**: Requires an API Key in the `Authorization` header.
-    ```
-    Authorization: Bearer <N8N_API_KEY>
-    ```
-  - **Payload**: An array of `TimeEntry` objects, where each object represents a time entry.
-    ```json
-    [
-      {
-        "workspace_id": "...",
-        "user_id": "...",
-        "project_id": "...",
-        "description": "...",
-        "start_time": "YYYY-MM-DDTHH:mm:ssZ",
-        "end_time": "YYYY-MM-DDTHH:mm:ssZ",
-        "billable": true,
-        "tag_ids": ["..."]
-      }
-    ]
-    ```
-
-- **Endpoint**: `GET /api/time-entries`
-  - **Description**: Retrieves projects, clients, and tags associated with a workspace to facilitate selection in n8n.
-  - **Query Params**:
-    - `workspace_id` (required): The workspace ID.
-
-## Architecture
-
-For a detailed description of the current and future architecture of the solution, see the [ARCHITECTURE.md](./ARCHITECTURE.md) document.
-
 ## Security
 
 - Passwords are hashed before storage (using SHA-256 for demo; use bcrypt in production)
@@ -261,31 +224,6 @@ Potential features to add:
 - Advanced reporting with charts
 - Time entry templates
 - Integrations with other tools
-
-### Next Steps: Automated Integrations
-
-The n8n integration is just the first step. The architecture is designed to expand and connect with other development and project management tools. The next steps include:
-
-- **GitLab/GitHub**:
-  - **Objective**: Automatically log time spent on commits and merge requests.
-  - **Flow**:
-    1. A developer makes a commit with a message that follows a specific format (e.g., `feat: TICKET-123 - description of work`).
-    2. A webhook notifies an application endpoint.
-    3. The system extracts the ticket ID, time (if included), and author, and creates a time entry associated with the correct project.
-
-- **Jira/Trello**:
-  - **Objective**: Synchronize time logged in tickets or cards with the application.
-  - **Flow**:
-    1. A user logs hours on a Jira task.
-    2. A webhook sends the data to the API.
-    3. The application creates or updates the time entry, associating it with the corresponding project and task.
-
-- **Google Drive/Calendar**:
-  - **Objective**: Create draft time entries from events in Google Calendar or activity in Google Drive documents.
-  - **Flow**:
-    1. A new event is detected in the calendar with a specific tag (e.g., `#work`).
-    2. The Google API notifies the application.
-    3. A draft time entry is created for the user to confirm.
 
 ## License
 

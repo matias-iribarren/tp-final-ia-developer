@@ -103,15 +103,3 @@ export interface ReportSummary {
     percentage: number
   }>
 }
-
-export interface TimeEntryPayload {
-  workspace_id: string
-  user_id: string
-  project_id?: string
-  description?: string
-  start_time: string
-  end_time?: string
-  billable?: boolean
-  tag_ids?: string[]
-}
-
